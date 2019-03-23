@@ -5,12 +5,50 @@ import OutputScreenRow from './outputScreenRow.js';
 import Button from './button.js';
 
 class Calc extends React.Component {
+  constructor(props){
+    super();
+
+    this.state = {
+      question: '',
+      answer: ''
+    }
+    this.handleClick = this.handleClick.bind(this);
+
+  }
+
+  handleClick(event){
+    const value = event.target.value;
+
+    switch (value) {
+      case '=':
+      var ans = '';
+
+        this.setState({ answer:ans , question: ''});
+        break;
+
+      case 'Clear':
+      this.setState({ question: '', answer: '' });
+      break;
+
+      case 'Delete':
+        {
+          var str = this.state.question;
+          this.setState({question: str});
+          break;
+        }
+
+        default: {
+          this.setState({ question: this.state.question += value })
+          break;
+        }
+    }
+  }
     render()
     {
     return (
     <div className="frame">
-    <CalcTitle value="GeeksforGeeks Calculator"/>
-    <div class="mainCalc">
+    <CalcTitle value="React Calculator"/>
+    <div className="mainCalc">
     <OutputScreen/>
     <div className="button-row">
       <Button label={'Clear'}/>
